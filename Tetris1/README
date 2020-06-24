@@ -1,0 +1,62 @@
+Name: Chiricu Miruna-Catalina
+
+
+	Important variables:
+- "H" - stores the map and its changes during the program
+- "mask" - is, in fact, the piece that descends on the map and moves left/right
+
+
+
+
+	~ map_display function:
+- displays the map when called :)
+
+- displays "#" instead of 1 and "." instead of 0 (because Gigel wanted his map to have an aesthetic appearance)
+
+- receives map input data
+
+	~ Bit function:
+- checks if a piece that stretches on two rows has been completely displayed on the screen
+
+- the variables "zeros1" and "zeros2" will store the number of zeros for "mask" and for "piece". If the number of zeros is different for the two, then the "piece" spans on two rows and has not been completely displayed
+
+	~ Score function:
+- calculates the score of the game
+
+	~ Delete function:
+- the function removes "full" lines from the map, then returns it, saving the number of lines removed (required for the score function)
+
+- variables: "byte", "byte2" - check which bits are set in the map
+	"byte3" - stores the map when needed, then deletes it
+
+- to eliminate "full" lines, we take the "byte" variable and check every bit of the map. After 8 bits, check if a line is full or not. If it is full, then the variable "byte3" saves the map and resets all the bits from the first position of the full line. Then, reset all the bits of the map before the full line (including the full line bits). "byte3" goes down 8 positions (to replace the line that is now empty). Then we unify the map with a | ("or" logically)
+
+	~ Collisions function:
+- check if there is a collision between the lowering piece (variable "mask") and the map
+
+	~ Left-right function:
+- by the variable "ok", the function returns the number of spaces (0) that the piece has until the edge of the row (as far as it can be moved left-right, without collisions)
+
+- If the move is> 0, then check the piece until it reaches a set bit (it starts from the right, that is, at the smallest position). We know, however, that the pieces can unfold on two rows, so the first position found is not necessarily the closest to the edge, but due to the shape of the pieces we know that the row above can only be with a position closer to the edge. . We check which is the smaller of the two and we keep it in the variable "min" which becomes the remainder of the division of min at 8 (to display the maximum possible move to the right)
+
+- If the move is <0, then it proceeds almost the same, only starting from the left (from the highest position) and keeping in mind a "max"
+(max = - max because the move is to the left)
+
+- "ok" becomes "min" or "max" depending on the case
+
+- In order not to change the variable "mask" that we will need again, we used the variable "mask2" which assumes the moving of the piece, after which it is verified by the possible collisions. Following this check, "ok" may become even more limited (so that the value of the variable "ok" does not change, we use the auxiliary variable "k").
+
+	~ The move function
+- calls the "left-right" function because it needs to know how far the piece can go, and then, depending on the sign, it performs the move
+
+~ main
+- calls all the above functions in a well-established order for the proper functioning of the game :)
+
+- variable:
+- "H2" - used to superimpose the piece with the map (if the map would store the piece directly, all moves of a piece would appear on the map)
+- "the piece" - memorizes the piece
+- "upp" - the last possible piece. It consists only of two bits of 1 that are strategically placed. We check if the map is full and if the next piece fits or not on the map
+- "ok1" - the same thing with ok, only in int main
+- "M" - memorizes the number of pieces
+
+- we read the map, the number of moves, then the game begins
