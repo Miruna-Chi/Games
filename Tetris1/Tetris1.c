@@ -1,4 +1,3 @@
-//Chiricu Miruna-Catalina
 #include <stdio.h>
 #include <math.h>
 
