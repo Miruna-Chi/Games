@@ -1,0 +1,32 @@
+
+	- createBoard
+ - receives the matrix assigned to the Board with its dimensions
+ - complete the matrix with the necessary color codes (black and white)
+
+
+	- readBoard
+ - read the board from a binary file, taking into account all the fields of a bmp file :)
+ - the reading of the colors on 3 bytes is explained in the comments at the finalBoard function
+
+
+	- createFullBoard
+ - write the matrix to the bmp file after each piece is placed on the board
+
+	- createPiece_O
+ - similiar process to the creation of the board, different colors and way of placement
+
+	- pieceRotations_O
+ - creates the files in which it prints the original matrix elements in the required order
+
+same with all other createdPiece_X, pieceRotations_X
+
+finalBoard
+ - receives the board, its dimensions, the name of the piece, the rotation and the column on which the piece must be placed. Search the file for the suitable piece and extract its matrix
+ - we take the matrix of the piece element by element and "put" it on the map. We compare each element with an element of the board in order to correctly place the piece. We start from the top row and we go down, remembering the last row where it can stay. If a collision occurs at the current turn, it returns to the previous one. If it reaches the last line without any obstacle, it stays there.
+
+ - we check if it is necessary to say Game_over by checking the "colors" around the piece, if it is not necessary, after we copy the piece on the board we check if there are full lines and we remove them
+
+
+main
+
+- we declare the variables, we assign all the necessary matrices (which we will release later) and we call the necessary functions for each parameter / argument
